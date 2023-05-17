@@ -150,7 +150,7 @@ export default function FormAdmin() {
 
           <Controller
           control={control}
-          name={Experience.Company}
+          name={Experience.Company00}
           render={({ field }) => (
             <Input {...field} style={{ width: "50%" }} placeholder="Company" />
           )}    
