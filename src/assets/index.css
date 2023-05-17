@@ -1,0 +1,26 @@
+@import '../../node_modules/antd/dist/antd.css';
+
+body{
+    background-color:  #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 320px;
+    min-height: 100vh;
+    font-family: monospace;
+}
+
+#FormAdmin{
+    padding: 30px;
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+}
+
+input{
+    font-family: monospace;
+}
+
+p[role="alert"]{
+    color: red;
+    opacity: 0.5;
+}
