@@ -1,61 +1,39 @@
 import { Button, Input, InputNumber, Radio } from "antd";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-
-const schema = yup
-  .object({
-    Name: yup.string().required(),
-    Age: yup.number().positive().integer().min(18).required(),
-    Email: yup.string().email().required(),
-    Password: yup.string().min(8).required(),
-    ConfirmPassword: yup
-      .string()
-      .oneOf([yup.ref("Password")], "Passwords Don't Match")
-      .required(),
-    Status: yup.string().required(),
-    NbrChild: yup
-      .number()
-      .positive()
-      .integer()
-      .when("Status", (Status, schema) => {
-        if (Status.toString() === "M") {
-          return schema.required("Required 'M'");
-        }
-        return schema;
-      }),
-    //Experience : yup.string().required(),  
-    Experience : yup.array().of(
-        yup.object().shape({
-          Company: yup.string().required("required COMPANY"),
-          Years: yup.string().required("required YEARS"),
-        })
-
-    )
-    //Compagny : yup.string().required(),  
-  })
-  .required();
+import { schema } from "../validators/schema";
+import ExperienceForm from "./ExperienceForm";
 
 export default function FormAdmin() {
   const {
     control,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm({
     mode: "onTouched",
     defaultValues: {
-      Name: "",
-      Experience: [{ Company: "", Years: "" }],
+      Name: "A",
+      Email: "A@test.com",
+      Age: 20,
+      Password: "123456789",
+      ConfirmPassword: "123456789",
+      Status: "M",
+      NbrChild: 1,
+      Experience: [],
     },
     resolver: yupResolver(schema),
   });
 
   const { fields, append, remove } = useFieldArray({
-    name: "Experience",
     control,
+    name: "Experience",
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (formData) => {
+    console.log("formData", formData);
+    reset();
+  };
 
   return (
     <div id="FormAdmin">
@@ -144,43 +122,36 @@ export default function FormAdmin() {
           <p role="alert">{errors.NbrChild?.message}</p>
         </div>
 
-        <div id="Experience" className="input-wrapper">
+        <div id="Sec-Experience" className="input-wrapper">
           <label>EXPERIENCE : </label>
           <br />
 
-          <Controller
-          control={control}
-          name={Experience.Company}
-          render={({ field }) => (
-            <Input {...field} style={{ width: "50%" }} placeholder="Company" />
-          )}    
-              />
+          <ExperienceForm {...append}/>
 
-        
-          <p role="alert">{errors.Experience?.message}</p>
-          <p role="alert">{errors.Company?.message}</p>
+          <div className="Lists-Experience">
+            {fields.map((item, index) => (
+              <div className="list" key={item.id}>
+                <span style={{ width: "45%" }}>Company: {item.Company} | </span>
+
+                <span style={{ width: "45%" }}>Years: {item.Years} | </span>
+
+                <Button
+                  style={{ width: "10%" }}
+                  type="button"
+                  id={index}
+                  onClick={() => remove(index)}
+                >
+                  -
+                </Button>
+              </div>
+            ))}
+          </div>
         </div>
-
-        {fields.map((field, index) => {
-          return (
-            <div key={field.id}>
-              <span style={{ width: "45%" }}>Company: {index} | </span>
-
-              <span style={{ width: "45%" }}>Years: {index} | </span>
-
-              <Button
-                style={{ width: "10%" }}
-                type="button"
-                onClick={() => remove(index)}
-              >
-                -
-              </Button>
-            </div>
-          );
-        })}
 
         <br />
         <input type="submit" value="submit" />
+
+        {console.log("errors:", errors)}
       </form>
     </div>
   );
