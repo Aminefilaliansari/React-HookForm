@@ -47,8 +47,8 @@ const ExperienceForm = ({append}) => {
 
                 <Button htmlType="button" onClick={handleSubmit(onSubmit)}>+</Button>
             </div>
-            {errors?.Company && <p>{errors.Company.message}</p>}
-            {errors?.Years && <p>{errors.Years.message}</p>}
+            {errors?.Company && <p role="alert">{errors.Company.message}</p>}
+            {errors?.Years && <p role="alert">{errors.Years.message}</p>}
         </>
     )
 }

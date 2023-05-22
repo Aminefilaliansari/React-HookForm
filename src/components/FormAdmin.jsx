@@ -1,8 +1,9 @@
-import { Button, Input, InputNumber, Radio } from "antd";
+import { Button, Input, InputNumber, Radio, Select } from "antd";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../validators/schema";
 import ExperienceForm from "./ExperienceForm";
+import TextArea from "antd/lib/input/TextArea";
 
 export default function FormAdmin() {
   const {
@@ -20,7 +21,9 @@ export default function FormAdmin() {
       ConfirmPassword: "123456789",
       Status: "M",
       NbrChild: 1,
-      Experience: [],
+      Experience: [{ Company: "Stc", Years: "2023" }],
+      Activity: "IT",
+      Comment: "Message",
     },
     resolver: yupResolver(schema),
   });
@@ -32,12 +35,13 @@ export default function FormAdmin() {
 
   const onSubmit = (formData) => {
     console.log("formData", formData);
-    //reset();
+    reset();
   };
 
   return (
     <div id="FormAdmin">
       <form onSubmit={handleSubmit(onSubmit)}>
+
         <div className="input-wrapper">
           <Controller
             name="Name"
@@ -123,10 +127,10 @@ export default function FormAdmin() {
         </div>
 
         <div id="Sec-Experience" className="input-wrapper">
-          <label>EXPERIENCE : </label>
+          <label>Experience : </label>
           <br />
 
-          <ExperienceForm append={append}/>
+          <ExperienceForm append={append} />
 
           <div className="Lists-Experience">
             {fields.map((item, index) => (
@@ -146,6 +150,43 @@ export default function FormAdmin() {
               </div>
             ))}
           </div>
+          {errors?.Experience && (
+            <p role="alert">{errors.Experience.message}</p>
+          )}
+        </div>
+
+        <div className="input-wrapper">
+          <label> Activity :</label>
+          <br />
+          <Controller
+            name="Activity"
+            control={control}
+            render={({ field }) => (
+              <Select
+                defaultValue=""
+                {...field}
+                options={[
+                  { value: "IT" },
+                  { value: "Ecommerce" },
+                  { value: "Designer" },
+                  { value: "Marketing" },
+                ]}
+                style={{ width: "100%" }}
+              />
+            )}
+          />
+          <p role="alert">{errors.Activity?.message}</p>
+        </div>
+
+        <div className="input-wrapper">
+          <Controller
+            name="Comment"
+            control={control}
+            render={({ field }) => (
+              <TextArea {...field} placeholder="Comment" />
+            )}
+          />
+          <p role="alert">{errors.Comment?.message}</p>
         </div>
 
         <br />

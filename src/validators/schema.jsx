@@ -31,5 +31,7 @@ export const schema = yup
         })
       )
       .min(1, "Expereince === 0 "),
+
+    Activity: yup.string().required(),
   })
   .required();
