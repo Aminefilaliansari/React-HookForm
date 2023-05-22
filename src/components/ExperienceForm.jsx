@@ -1,7 +1,7 @@
 import { useForm, Controller } from "react-hook-form";
 import { Input, Button } from 'antd';
 
-const ExperienceForm = ({...append}) => {
+const ExperienceForm = ({append}) => {
     const { control, handleSubmit, reset, formState: { errors } } = useForm({
         defaultValues: {
             Company: '',
@@ -52,5 +52,10 @@ const ExperienceForm = ({...append}) => {
         </>
     )
 }
+
+
+ExperienceForm.propTypes = {
+    append: () => '',
+  };
 
 export default ExperienceForm;

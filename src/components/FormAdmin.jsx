@@ -32,7 +32,7 @@ export default function FormAdmin() {
 
   const onSubmit = (formData) => {
     console.log("formData", formData);
-    reset();
+    //reset();
   };
 
   return (
@@ -126,7 +126,7 @@ export default function FormAdmin() {
           <label>EXPERIENCE : </label>
           <br />
 
-          <ExperienceForm {...append}/>
+          <ExperienceForm append={append}/>
 
           <div className="Lists-Experience">
             {fields.map((item, index) => (
