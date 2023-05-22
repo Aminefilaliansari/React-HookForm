@@ -31,7 +31,15 @@ export const schema = yup
         })
       )
       .min(1, "Expereince === 0 "),
-
     Activity: yup.string().required(),
+    picture: yup
+      .mixed()
+      .required()
+      .test("fileFormat", "Only JPG or PNG files are allowed", (value) => {
+        return value && ["image/jpeg", "image/png"].includes(value[0].type);
+      })
+      .test("fileSize", "The file is too large", (value) => {
+        return value && value[0].size <= 1048576; // 1MB
+      }),
   })
   .required();

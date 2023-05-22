@@ -1,9 +1,10 @@
-import { Button, Input, InputNumber, Radio, Select } from "antd";
+import { Button, Input, InputNumber, Radio, Select, Upload } from "antd";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../validators/schema";
 import ExperienceForm from "./ExperienceForm";
 import TextArea from "antd/lib/input/TextArea";
+import { UploadOutlined } from "@ant-design/icons/lib/icons";
 
 export default function FormAdmin() {
   const {
@@ -33,15 +34,14 @@ export default function FormAdmin() {
     name: "Experience",
   });
 
-  const onSubmit = (formData) => {
-    console.log("formData", formData);
+  const onSubmit = (data) => {
+    console.log("data:", data);
     reset();
   };
 
   return (
     <div id="FormAdmin">
       <form onSubmit={handleSubmit(onSubmit)}>
-
         <div className="input-wrapper">
           <Controller
             name="Name"
@@ -187,6 +187,28 @@ export default function FormAdmin() {
             )}
           />
           <p role="alert">{errors.Comment?.message}</p>
+        </div>
+
+        <div className="input-wrapp">
+          <Controller
+            name="picture"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Upload
+                beforeUpload={() => false}
+                accept=".jpg,.png"
+                maxCount={1}
+                onChange={(info) => {
+                    onChange(info.fileList);
+                  }
+                }
+                fileList={value}
+              >
+                <Button icon={<UploadOutlined />}>Upload</Button>
+              </Upload>
+            )}
+          />
+          {errors.picture && <p role="alert">{errors.picture.message}</p>}
         </div>
 
         <br />
