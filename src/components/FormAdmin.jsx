@@ -5,6 +5,7 @@ import { schema } from "../validators/schema";
 import ExperienceForm from "./ExperienceForm";
 import TextArea from "antd/lib/input/TextArea";
 import { UploadOutlined } from "@ant-design/icons/lib/icons";
+import JobParent from "./JobParent";
 
 export default function FormAdmin() {
   const {
@@ -36,6 +37,7 @@ export default function FormAdmin() {
 
   const onSubmit = (data) => {
     console.log("data:", data);
+    alert("Done");
     reset();
   };
 
@@ -199,9 +201,10 @@ export default function FormAdmin() {
                 accept=".jpg,.png"
                 maxCount={1}
                 onChange={(info) => {
+                  if (info.fileList) {
                     onChange(info.fileList);
                   }
-                }
+                }}
                 fileList={value}
               >
                 <Button icon={<UploadOutlined />}>Upload</Button>
@@ -210,6 +213,8 @@ export default function FormAdmin() {
           />
           {errors.picture && <p role="alert">{errors.picture.message}</p>}
         </div>
+
+                <JobParent control={control} errors={errors} />
 
         <br />
         <input type="submit" value="submit" />

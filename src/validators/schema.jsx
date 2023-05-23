@@ -41,5 +41,6 @@ export const schema = yup
       .test("fileSize", "The file is too large", (value) => {
         return value && value[0].size <= 1048576; // 1MB
       }),
+     job: yup.string().required(), 
   })
   .required();
