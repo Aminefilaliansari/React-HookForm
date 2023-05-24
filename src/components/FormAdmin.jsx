@@ -16,16 +16,16 @@ export default function FormAdmin() {
   const { control, formState, handleSubmit, reset } = useForm({
     mode: "onTouched",
     defaultValues: {
-      Name: "",
-      Email: "",
-      Age: undefined,
-      Password: "",
-      ConfirmPassword: "",
-      Status: "",
-      NbrChild: undefined,
-      Experience: [],
-      Activity: "",
-      Comment: "",
+      name: "",
+      email: "",
+      age: undefined,
+      password: "",
+      confirmPassword: "",
+      status: "",
+      nbrChild: undefined,
+      experience: [],
+      activity: "",
+      comment: "",
       job: "",
     },
     resolver: yupResolver(schema),
@@ -33,7 +33,7 @@ export default function FormAdmin() {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "Experience",
+    name: "experience",
   });
 
   const onSubmit = (data) => {
@@ -45,30 +45,30 @@ export default function FormAdmin() {
   const { errors } = formState;
 
   return (
-    <div id="FormAdmin">
+    <div id="formAdmin">
       <FormProvider control={control} formState={formState}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="input-wrapper">
             <Controller
-              name="Name"
+              name="name"
               control={control}
               render={({ field }) => <Input {...field} placeholder="Name" />}
             />
-            <p role="alert">{errors.Name?.message}</p>
+            <p role="alert">{errors.name?.message}</p>
           </div>
 
           <div className="input-wrapper">
             <Controller
-              name="Email"
+              name="email"
               control={control}
               render={({ field }) => <Input {...field} placeholder="Email" />}
             />
-            <p role="alert">{errors.Email?.message}</p>
+            <p role="alert">{errors.email?.message}</p>
           </div>
 
           <div className="input-wrapper">
             <Controller
-              name="Age"
+              name="age"
               control={control}
               render={({ field }) => (
                 <InputNumber
@@ -78,34 +78,34 @@ export default function FormAdmin() {
                 />
               )}
             />
-            <p role="alert">{errors.Age?.message}</p>
+            <p role="alert">{errors.age?.message}</p>
           </div>
 
           <div className="input-wrapper">
             <Controller
-              name="Password"
+              name="password"
               control={control}
               render={({ field }) => (
                 <Input.Password {...field} placeholder="Password" />
               )}
             />
-            <p role="alert">{errors.Password?.message}</p>
+            <p role="alert">{errors.password?.message}</p>
           </div>
 
           <div className="input-wrapper">
             <Controller
-              name="ConfirmPassword"
+              name="confirmPassword"
               control={control}
               render={({ field }) => (
                 <Input.Password {...field} placeholder="ConfirmPassword" />
               )}
             />
-            <p role="alert">{errors.ConfirmPassword?.message}</p>
+            <p role="alert">{errors.confirmPassword?.message}</p>
           </div>
 
           <div className="input-wrapper">
             <Controller
-              name="Status"
+              name="status"
               control={control}
               render={({ field }) => (
                 <Radio.Group {...field}>
@@ -114,12 +114,12 @@ export default function FormAdmin() {
                 </Radio.Group>
               )}
             />
-            <p role="alert">{errors.Status?.message}</p>
+            <p role="alert">{errors.status?.message}</p>
           </div>
 
           <div className="input-wrapper">
             <Controller
-              name="NbrChild"
+              name="nbrChild"
               control={control}
               render={({ field }) => (
                 <InputNumber
@@ -129,16 +129,16 @@ export default function FormAdmin() {
                 />
               )}
             />
-            <p role="alert">{errors.NbrChild?.message}</p>
+            <p role="alert">{errors.nbrChild?.message}</p>
           </div>
 
-          <div id="Sec-Experience" className="input-wrapper">
+          <div id="sec-Experience" className="input-wrapper">
             <label>Experience : </label>
             <br />
 
             <ExperienceForm append={append} />
 
-            <div className="Lists-Experience">
+            <div className="lists-Experience">
               {fields.map((item, index) => (
                 <div className="list" key={item.id}>
                   <span style={{ width: "45%" }}>
@@ -159,7 +159,7 @@ export default function FormAdmin() {
               ))}
             </div>
             {errors?.Experience && (
-              <p role="alert">{errors.Experience.message}</p>
+              <p role="alert">{errors.experience.message}</p>
             )}
           </div>
 
@@ -183,7 +183,7 @@ export default function FormAdmin() {
                 />
               )}
             />
-            <p role="alert">{errors.Activity?.message}</p>
+            <p role="alert">{errors.activity?.message}</p>
           </div>
 
           <div className="input-wrapper">
@@ -194,7 +194,7 @@ export default function FormAdmin() {
                 <TextArea {...field} placeholder="Comment" />
               )}
             />
-            <p role="alert">{errors.Comment?.message}</p>
+            <p role="alert">{errors.comment?.message}</p>
           </div>
 
           <div className="input-wrapp">
