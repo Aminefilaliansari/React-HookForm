@@ -45,8 +45,8 @@ const ExperienceForm = ({ append }) => {
           +
         </Button>
       </div>
-      {errors?.Company && <p role="alert">{errors.company.message}</p>}
-      {errors?.Years && <p role="alert">{errors.years.message}</p>}
+      {errors?.company && <p role="alert">{errors.company.message}</p>}
+      {errors?.years && <p role="alert">{errors.years.message}</p>}
     </>
   );
 };
