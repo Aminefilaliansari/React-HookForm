@@ -110,7 +110,7 @@ export default function FormAdmin() {
               render={({ field }) => (
                 <Radio.Group {...field}>
                   <Radio value="C">C</Radio>
-                  <Radio value={"M"}>M</Radio>
+                  <Radio value="M">M</Radio>
                 </Radio.Group>
               )}
             />
