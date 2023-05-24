@@ -9,8 +9,8 @@ const ExperienceForm = ({ append }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      Company: "",
-      Years: "",
+      company: "",
+      years: "",
     },
   });
 
@@ -24,7 +24,7 @@ const ExperienceForm = ({ append }) => {
     <>
       <div>
         <Controller
-          name={`Company`}
+          name={`company`}
           control={control}
           render={({ field }) => (
             <Input {...field} style={{ width: "45%" }} placeholder="Company" />
@@ -33,7 +33,7 @@ const ExperienceForm = ({ append }) => {
         />
 
         <Controller
-          name={`Years`}
+          name={`years`}
           control={control}
           render={({ field }) => (
             <Input {...field} style={{ width: "45%" }} placeholder="Years" />
@@ -45,8 +45,8 @@ const ExperienceForm = ({ append }) => {
           +
         </Button>
       </div>
-      {errors?.Company && <p role="alert">{errors.Company.message}</p>}
-      {errors?.Years && <p role="alert">{errors.Years.message}</p>}
+      {errors?.Company && <p role="alert">{errors.company.message}</p>}
+      {errors?.Years && <p role="alert">{errors.years.message}</p>}
     </>
   );
 };
