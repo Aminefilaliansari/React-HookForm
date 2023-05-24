@@ -1,11 +1,12 @@
 import { Button, Input, InputNumber, Radio, Select, Upload } from "antd";
-import { useForm, Controller, useFieldArray } from "react-hook-form";
+import { useForm, Controller, useFieldArray, FormProvider } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../validators/schema";
 import ExperienceForm from "./ExperienceForm";
 import TextArea from "antd/lib/input/TextArea";
 import { UploadOutlined } from "@ant-design/icons/lib/icons";
 import JobParent from "./JobParent";
+
 
 export default function FormAdmin() {
   const {
@@ -26,6 +27,7 @@ export default function FormAdmin() {
       Experience: [{ Company: "Stc", Years: "2023" }],
       Activity: "IT",
       Comment: "Message",
+      job:"Front-end"
     },
     resolver: yupResolver(schema),
   });
@@ -43,6 +45,7 @@ export default function FormAdmin() {
 
   return (
     <div id="FormAdmin">
+      <FormProvider {...control} {...errors}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="input-wrapper">
           <Controller
@@ -216,11 +219,12 @@ export default function FormAdmin() {
 
                 <JobParent control={control} errors={errors} />
 
-        <br />
+        <br/><br/>
         <input type="submit" value="submit" />
 
         {console.log("errors:", errors)}
       </form>
+      </FormProvider>
     </div>
   );
 }

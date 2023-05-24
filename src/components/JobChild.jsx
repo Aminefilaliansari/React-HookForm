@@ -1,7 +1,11 @@
 import { Input } from "antd";
-import {Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
-export default function JobChild({control, errors}) {
+export default function JobChild() {
+  const control = useFormContext();
+  const errors = useFormContext();
+
+  //const {control , errors} = useFormContext()
 
   return (
     <>
@@ -11,7 +15,7 @@ export default function JobChild({control, errors}) {
         name="job"
         render={({ field }) => <Input {...field} />}
       />
-      {console.log("ERROR JOB:",errors)}
+
       {errors.job && <p role="alert">{errors.job.message}</p>}
     </>
   );
